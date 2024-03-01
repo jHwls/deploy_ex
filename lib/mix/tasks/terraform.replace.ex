@@ -46,7 +46,7 @@ defmodule Mix.Tasks.Terraform.Replace do
   end
 
   defp terraform_apply_replace(replace_str, terraform_args, opts) do
-    cmd = "terraform apply #{terraform_args} --replace \"#{replace_str}\""
+    cmd = "#{DeployEx.Config.iac_tool()} apply #{terraform_args} --replace \"#{replace_str}\""
     cmd = if opts[:auto_approve], do: "#{cmd} --auto-approve", else: cmd
 
     DeployExHelpers.run_command_with_input(cmd, opts[:directory])

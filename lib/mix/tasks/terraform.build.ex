@@ -98,7 +98,10 @@ defmodule Mix.Tasks.Terraform.Build do
   end
 
   defp run_terraform_init(params) do
-    DeployExHelpers.run_command_with_input("terraform init", params[:directory])
+    DeployExHelpers.run_command_with_input(
+      "#{DeployEx.Config.iac_tool()} init",
+      params[:directory]
+    )
   end
 
   defp ensure_terraform_directory_exists(directory) do

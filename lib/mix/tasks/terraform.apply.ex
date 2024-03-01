@@ -43,7 +43,7 @@ defmodule Mix.Tasks.Terraform.Apply do
   end
 
   defp run_command(args, opts) do
-    cmd = "terraform apply #{DeployExHelpers.to_terraform_args(args)}"
+    cmd = "#{DeployEx.Config.iac_tool()} apply #{DeployExHelpers.to_terraform_args(args)}"
     cmd = if opts[:auto_approve], do: "#{cmd} --auto-approve", else: cmd
 
     DeployExHelpers.run_command_with_input(cmd, opts[:directory])
